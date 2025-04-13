@@ -18,9 +18,14 @@ let isQuiting = false
 async function createWindow(): Promise<BrowserWindow> {
   return new Promise<BrowserWindow>((resolve) => {
     const window = new BrowserWindow({
-      width: 900,
-      height: 670,
+      width: 462,
+      height: 647,
+      maxWidth: 462,
+      maxHeight: 647,
+      minWidth: 462,
+      minHeight: 647,
       show: false,
+      fullscreenable: false,
       autoHideMenuBar: true,
       ...(process.platform === 'linux' ? { icon } : {}),
       webPreferences: {
