@@ -1,5 +1,5 @@
 import { Notification } from 'electron'
-import icon from '../../../resources/aura-image.png?asset'
+import icon from '../../../resources/icon.png?asset'
 
 /**
  * Muestra una notificación con un ícono fijo.

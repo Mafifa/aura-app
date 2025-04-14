@@ -1,5 +1,5 @@
 import { app, Tray, Menu, BrowserWindow } from 'electron'
-import icon from '../../../resources/aura-image.png?asset'
+import icon from '../../../resources/icon.png?asset'
 
 export class TrayManager {
   private tray: Tray | null = null
