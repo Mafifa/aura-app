@@ -5,8 +5,9 @@ import icon from '../../resources/icon.png?asset'
 import { showNotification } from './core/notificationManager'
 import { TrayManager } from './core/trayManager'
 import * as fs from 'fs'
+import { initializeUpdater } from './core/updateManager'
 
-let mainWindow: BrowserWindow | null = null
+let mainWindow: BrowserWindow
 let trayManager: TrayManager | null = null
 
 // Variable para controlar si la aplicación está cerrándose
@@ -145,6 +146,7 @@ app.whenReady().then(async () => {
   } catch (error) {
     console.error('Error durante la inicialización:', error)
   }
+  initializeUpdater(mainWindow)
 })
 
 // Salir cuando todas las ventanas estén cerradas (excepto en macOS)
