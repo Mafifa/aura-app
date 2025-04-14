@@ -50,9 +50,9 @@ async function createWindow(): Promise<BrowserWindow> {
       }
     })
 
+    // No mostrar la ventana al iniciar
     window.on('ready-to-show', () => {
-      window.show()
-      resolve(window)
+      resolve(window) // Solo resolvemos la promesa, pero no mostramos la ventana
     })
 
     window.webContents.setWindowOpenHandler((details) => {
@@ -74,6 +74,8 @@ async function createWindow(): Promise<BrowserWindow> {
         window.hide()
       }
     })
+
+    resolve(window)
   })
 }
 
@@ -83,8 +85,17 @@ app.whenReady().then(async () => {
     // Configurar el ID del modelo de usuario de la aplicación para Windows
     electronApp.setAppUserModelId('com.electron')
 
+    // Habilitar el arranque automático
+    app.setLoginItemSettings({
+      openAtLogin: true, // Habilita el inicio automático
+      openAsHidden: true // Inicia la aplicación oculta (macOS)
+    })
+
     // Crear la ventana principal
     mainWindow = await createWindow()
+
+    // Ocultar la ventana principal al iniciar
+    mainWindow.hide()
 
     // Inicializar el gestor de bandeja
     trayManager = new TrayManager(mainWindow)
@@ -97,7 +108,9 @@ app.whenReady().then(async () => {
 
     // Re-crear la ventana en macOS si no hay otras abiertas
     app.on('activate', () => {
-      if (BrowserWindow.getAllWindows().length === 0) createWindow()
+      if (BrowserWindow.getAllWindows().length === 0) {
+        createWindow() // Crea la ventana pero no la muestra
+      }
     })
 
     // Manejar el evento de cierre de la aplicación
