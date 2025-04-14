@@ -1,6 +1,6 @@
 {
   "name": "aura-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Aura helps you stay motivated and mindful throughout your day with timely reminders.",
   "main": "./out/main/index.js",
   "homepage": "https://github.com/Mafifa/aura-app",
