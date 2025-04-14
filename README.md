@@ -1,4 +1,11 @@
 <div align="center">
+
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/mafifa/aura-app?style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/mafifa/aura-app/releases.yml?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/mafifa/aura-app?style=for-the-badge)
+![GitHub stars](https://img.shields.io/github/stars/mafifa/aura-app?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/mafifa/aura-app?style=for-the-badge)
+
   <div style="display: flex; align-items: center; justify-content: center;">
       <img src="resources/icon.png" alt="Aura Logo" width="80" height="80" />
     <h1 style="margin-left: 20px;">Aura</h1>
@@ -7,12 +14,6 @@
   <p><em>Mindful reminders for your daily journey</em></p>
 
   <!-- Badges -->
-
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/mafifa/aura-app?style=for-the-badge)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/mafifa/aura-app/releases.yml?style=for-the-badge)
-![GitHub issues](https://img.shields.io/github/issues/mafifa/aura-app?style=for-the-badge)
-![GitHub stars](https://img.shields.io/github/stars/mafifa/aura-app?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/mafifa/aura-app?style=for-the-badge)
 
 </div>
 
