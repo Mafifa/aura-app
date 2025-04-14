@@ -1,13 +1,27 @@
 {
   "name": "aura-app",
   "version": "1.0.0",
-  "description": "An Electron application with React and TypeScript",
+  "description": "Aura helps you stay motivated and mindful throughout your day with timely reminders.",
   "main": "./out/main/index.js",
-  "author": "example.com",
-  "homepage": "https://electron-vite.org",
+  "homepage": "https://github.com/Mafifa/aura-app",
+  "author": {
+    "name": "Mafifa",
+    "email": "mafifacu@gmail.com",
+    "url": "https://github.com/Mafifa/aura-app"
+  },
+  "build": {
+    "appId": "com.mafifa.aura-app.app",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Mafifa",
+        "repo": "aura-app"
+      }
+    ]
+  },
   "scripts": {
     "format": "prettier --write .",
-    "lint": "eslint --cache .",
+    "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
     "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
     "typecheck": "npm run typecheck:node && npm run typecheck:web",
@@ -16,9 +30,10 @@
     "build": "npm run typecheck && electron-vite build",
     "postinstall": "electron-builder install-app-deps",
     "build:unpack": "npm run build && electron-builder --dir",
-    "build:win": "npm run build && electron-builder --win",
     "build:mac": "electron-vite build && electron-builder --mac",
-    "build:linux": "electron-vite build && electron-builder --linux"
+    "build:win": "npm run build && electron-builder --win",
+    "release:mac": "electron-vite build && electron-builder --mac -p always",
+    "release:win": "npm run build && electron-builder --win -p always"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",

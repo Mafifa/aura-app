@@ -1,3 +1,3 @@
-provider: generic
-url: https://example.com/auto-updates
-updaterCacheDirName: aura-app-updater
+provider: github
+url: https://github.com/Mafifa/aura-app.git
+updaterCacheDirName: aura-app

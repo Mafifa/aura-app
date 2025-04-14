@@ -1,5 +1,5 @@
-appId: com.electron.app
-productName: aura-app
+appId: com.mafifa.aura-app.app
+productName: Aura
 directories:
   buildResources: build
 files:
@@ -39,5 +39,7 @@ appImage:
   artifactName: ${name}-${version}.${ext}
 npmRebuild: false
 publish:
-  provider: generic
-  url: https://example.com/auto-updates
+  provider: github
+  url: https://github.com/Mafifa/aura-app.git
+  owner: Mafifa
+  repo: aura-app
