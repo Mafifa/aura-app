@@ -1,4 +1,4 @@
-appId: com.mafifa.aura-app.app
+appId: com.mafifa.Aura
 productName: Aura
 directories:
   buildResources: build
@@ -12,7 +12,7 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: aura-app
+  executableName: Aura
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
