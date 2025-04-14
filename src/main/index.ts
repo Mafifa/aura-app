@@ -95,9 +95,6 @@ app.whenReady().then(async () => {
     // Crear la ventana principal
     mainWindow = await createWindow()
 
-    // Ocultar la ventana principal al iniciar
-    mainWindow.hide()
-
     // Inicializar el gestor de bandeja
     trayManager = new TrayManager(mainWindow)
     trayManager.createTray()
@@ -139,7 +136,7 @@ app.whenReady().then(async () => {
     }
 
     // Mostrar una notificación cada 45 minutos (45 * 60 * 1000 ms)
-    setInterval(showRandomNotification, 45 * 60 * 1000)
+    setInterval(showRandomNotification, 29 * 60 * 1000)
 
     // Mostrar una notificación inmediatamente al iniciar
     showRandomNotification()

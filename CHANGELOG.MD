@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0] - 2025-04-14
+
+### update
+
+- update metada app when is installed
+- update time to send notification
+
 ## [1.0.1] - 2025-04-13
 
 ### update
