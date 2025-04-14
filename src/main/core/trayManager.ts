@@ -51,7 +51,7 @@ export class TrayManager {
    * Actualiza el tooltip del ícono de la bandeja.
    * @param {string} tooltip - Texto que se mostrará como tooltip.
    */
-  private updateTooltip(tooltip: string): void {
+  public updateTooltip(tooltip: string): void {
     if (!this.tray) return
     this.tray.setToolTip(tooltip)
   }

@@ -8,25 +8,12 @@ import AuraLogo from "./components/aura-logo"
 export default function AuraApp () {
   const [lastNotification, setLastNotification] = useState<string | null>(null)
 
-  // Sample facts/reminders
-  const facts = [
-    "Drinking water improves your focus and energy.",
-    "Take a deep breath. Reset your mind.",
-    "A small step forward is still progress.",
-    "You are capable of amazing things.",
-    "Your potential is limitless. WHY NOT YOU?",
-    "Success comes to those who persist.",
-    "Your journey matters. Keep going.",
-    "You have overcome challenges before.",
-    "Your efforts today shape tomorrow.",
-    "Believe in yourself as others believe in you.",
-  ]
-
   useEffect(() => {
-    // Simulate a notification for demonstration purposes
-    const randomFact = facts[Math.floor(Math.random() * facts.length)]
-    setLastNotification(randomFact)
-  }, [])
+    // Escuchar actualizaciones de frases desde el backend
+    window.electron.ipcRenderer.on('phrase-update', (_, phrase) => {
+      setLastNotification(phrase);
+    });
+  }, []);
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden">

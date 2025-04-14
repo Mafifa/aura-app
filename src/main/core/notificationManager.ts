@@ -6,7 +6,7 @@ import icon from '../../../resources/aura-image.png?asset'
  * @param {string} title - Título de la notificación.
  * @param {string} body - Cuerpo de la notificación.
  */
-export function showNotification(title = 'Notificación', body = 'Sin mensaje.') {
+export function showNotification(title = 'Aura', body = 'Sin mensaje.') {
   const notificationOptions = {
     title,
     body,

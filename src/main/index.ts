@@ -1,9 +1,10 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, shell } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { showNotification } from './core/notificationManager'
 import { TrayManager } from './core/trayManager'
+import * as fs from 'fs'
 
 let mainWindow: BrowserWindow | null = null
 let trayManager: TrayManager | null = null
@@ -11,10 +12,25 @@ let trayManager: TrayManager | null = null
 // Variable para controlar si la aplicación está cerrándose
 let isQuiting = false
 
-/**
- * Crea la ventana principal.
- * @returns Una promesa que resuelve la instancia de BrowserWindow cuando está lista.
- */
+// Cargar las frases desde el archivo JSON
+function loadPhrases(): { id: number; text: string }[] {
+  const phrasesPath = join(__dirname, '../../resources/quotes.json')
+  try {
+    const data = fs.readFileSync(phrasesPath, 'utf-8')
+    return JSON.parse(data)
+  } catch (error) {
+    console.error('Error al cargar las frases:', error)
+    return []
+  }
+}
+
+// Obtener una frase aleatoria
+function getRandomPhrase(phrases: { id: number; text: string }[]): string {
+  if (phrases.length === 0) return 'No hay frases disponibles.'
+  const randomIndex = Math.floor(Math.random() * phrases.length)
+  return phrases[randomIndex].text
+}
+
 async function createWindow(): Promise<BrowserWindow> {
   return new Promise<BrowserWindow>((resolve) => {
     const window = new BrowserWindow({
@@ -70,9 +86,6 @@ app.whenReady().then(async () => {
     // Crear la ventana principal
     mainWindow = await createWindow()
 
-    // Mostrar una notificación de prueba
-    showNotification('Aura', 'Este es un mensaje con Electron')
-
     // Inicializar el gestor de bandeja
     trayManager = new TrayManager(mainWindow)
     trayManager.createTray()
@@ -81,9 +94,6 @@ app.whenReady().then(async () => {
     app.on('browser-window-created', (_, window) => {
       optimizer.watchWindowShortcuts(window)
     })
-
-    // IPC test
-    ipcMain.on('ping', () => console.log('pong'))
 
     // Re-crear la ventana en macOS si no hay otras abiertas
     app.on('activate', () => {
@@ -94,6 +104,31 @@ app.whenReady().then(async () => {
     app.on('before-quit', () => {
       isQuiting = true // Marcar que la aplicación está cerrándose
     })
+
+    // Configurar el sistema de notificaciones
+    const phrases = loadPhrases() // Cargar las frases
+
+    // Función para mostrar una notificación con una frase aleatoria
+    function showRandomNotification() {
+      const phrase = getRandomPhrase(phrases)
+      showNotification('Aura', phrase)
+
+      // Enviar la frase al frontend
+      if (mainWindow) {
+        mainWindow.webContents.send('phrase-update', phrase)
+      }
+
+      // Actualizar el tooltip del tray
+      if (trayManager) {
+        trayManager.updateTooltip(`Aura\n${phrase}`)
+      }
+    }
+
+    // Mostrar una notificación cada 45 minutos (45 * 60 * 1000 ms)
+    setInterval(showRandomNotification, 45 * 60 * 1000)
+
+    // Mostrar una notificación inmediatamente al iniciar
+    showRandomNotification()
   } catch (error) {
     console.error('Error durante la inicialización:', error)
   }
